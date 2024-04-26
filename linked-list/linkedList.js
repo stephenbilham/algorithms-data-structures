@@ -81,12 +81,44 @@ class LinkedList {
 		}
 		return currentNode;
 	}
+
+	// this was confusing due to so many moving parts
+	reverse() {
+		if (!this.head.next) {
+			return this.head;
+		}
+
+		// 1
+		let first = this.head;
+		// 1 --> 16
+		this.tail = this.head;
+		// 5
+		let second = first.next;
+
+		while (second) {
+			// 10
+			const temp = second.next;
+			// second var points to first (1)
+			second.next = first;
+			// 10 --> 1
+			first = second;
+			// second --> 5
+			second = temp;
+		}
+
+		this.head.next = null;
+		// by the time it loops it becomes 16
+		this.head = first;
+
+		return this;
+	}
 }
 
 const myLinkedList = new LinkedList(10);
 myLinkedList.append(5);
 myLinkedList.append(16);
 myLinkedList.prepend(1);
-console.log(myLinkedList.insert(99, 2));
-console.log(myLinkedList.remove(2));
-console.log(myLinkedList);
+// console.log(myLinkedList.insert(99, 2));
+// console.log(myLinkedList.remove(2));
+// console.log(myLinkedList);
+console.log(myLinkedList.reverse());
