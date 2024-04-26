@@ -27,18 +27,14 @@ class LinkedList {
 	}
 	append(value) {
 		const newNode = new Node(value);
-		// I was thinking why would we not update this.head.next but they point to the same place in memory
-		//Update the next pointer of the current tail node to point to the new node
 		this.tail.next = newNode;
-		// Move the tail pointer to the newly added node
 		this.tail = newNode;
 		this.length++;
 		return this;
 	}
 
 	prepend(value) {
-		let newNode = new Node(value);
-
+		const newNode = new Node(value);
 		newNode.next = this.head;
 		this.head = newNode;
 		this.length++;
@@ -54,14 +50,13 @@ class LinkedList {
 		return array;
 	}
 	insert(value, index) {
-		// check params
 		if (index >= this.length) {
 			this.append(value);
 		}
-		let newNode = new Node(value);
-		let leader = this.traverse(index - 1);
-		let holdingPointer = leader.next;
 
+		const newNode = new Node(value);
+		const leader = this.traverse(index - 1);
+		const holdingPointer = leader.next;
 		leader.next = newNode;
 		newNode.next = holdingPointer;
 		this.length++;
@@ -69,7 +64,7 @@ class LinkedList {
 	}
 
 	remove(index) {
-		let leader = this.traverse(index - 1);
+		const leader = this.traverse(index - 1);
 		const unwantedNode = leader.next;
 		leader.next = unwantedNode.next;
 		this.length--;
@@ -94,5 +89,4 @@ myLinkedList.append(16);
 myLinkedList.prepend(1);
 console.log(myLinkedList.insert(99, 2));
 console.log(myLinkedList.remove(2));
-
-// console.log(myLinkedList);
+console.log(myLinkedList);
